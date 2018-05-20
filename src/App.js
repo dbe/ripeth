@@ -12,6 +12,7 @@ class App extends Component {
 
     this.web3 = new Web3(Web3.givenProvider);
     window.web3 = this.web3;
+    
 
     this.web3.eth.getAccounts().then(accounts => {
       this.web3.eth.defaultAccount = accounts[0]
