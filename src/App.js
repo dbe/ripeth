@@ -11,12 +11,14 @@ class App extends Component {
     super(props);
 
     this.web3 = new Web3(Web3.givenProvider);
+    window.web3 = this.web3;
 
     this.web3.eth.getAccounts().then(accounts => {
       this.web3.eth.defaultAccount = accounts[0]
     });
 
-    const addr = "0xAed626f1F5EA8D0784918b8734D9293fd7Df684d";
+    console.log(process.env)
+    const addr = process.env.REACT_APP_CONTRACT_ADDRESS;
     this.contract = new this.web3.eth.Contract(BurnContract.abi, addr);
     window.contract = this.contract;
 
@@ -43,14 +45,14 @@ class App extends Component {
     });
   }
 
-  addBurn(result) {
-    let newBurn = {
-      message: result.message,
-      burnerAddress: result.burnerAddress,
-      burntAmount: result.burntAmount
+  addBurn(burn) {
+    const newBurn = {
+      message: burn.message,
+      burnerAddress: burn.burnerAddress,
+      burntAmount: burn.burntAmount
     };
 
-    let burns = this.state.burns.slice();
+    const burns = this.state.burns.slice();
     burns.push(newBurn);
     this.setState({burns});
   }
@@ -67,10 +69,23 @@ class App extends Component {
     });
   }
 
+  totalBurnt() {
+    return this.state.burns.reduce(function(sum, burn){ return sum + parseInt(burn.burntAmount)}, 0);
+  }
+
+  largestBurn() {
+    return Math.max(...this.state.burns.map(burn => parseInt(burn.burntAmount)));
+  }
+
   render() {
     return (
       <div className="App">
         <h1>Burns</h1>
+        <div className="burn-stats">
+          <p>Number of burns: {this.state.burns.length}</p>
+          <p>Total Burnt: {this.totalBurnt()}</p>
+          <p>Largest Burn: {this.largestBurn()}</p>
+        </div>
         <ul>
           {this.burns()}
         </ul>

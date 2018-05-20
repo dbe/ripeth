@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 class BurnForm extends React.Component {
   constructor(props) {
@@ -11,9 +11,11 @@ class BurnForm extends React.Component {
     this.burn(this.message.value, this.amount.value);
   }
 
-  burn(message, amount) {
+  async burn(message, amount) {
+    let accounts = await this.props.web3.eth.getAccounts();
+
     this.props.contract.methods.burn(message).send({
-      from: this.props.web3.eth.defaultAccount,
+      from: accounts[0],
       value: amount,
       gas: 200000
     })
