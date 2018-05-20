@@ -17,4 +17,8 @@ contract BurnContract {
     burns.push(b);
     emit BurnEvent(msg.sender, _message, msg.value);
   }
+
+  function burnCount() public view returns(uint) {
+    return burns.length;
+  }
 }

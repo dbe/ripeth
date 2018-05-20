@@ -24,6 +24,7 @@ contract('Burn', function(accounts) {
     const cEndingBalance = web3.eth.getBalance(instance.address);
 
     const burn = await instance.burns.call(0);
+    const burnCount = await instance.burnCount.call();
 
     assert.equal(burn[0], accounts[0], "Correct account was not saved.");
     assert.equal(burn[1], "Fuck me! - Donald Trump", "Correct message was not saved.");
