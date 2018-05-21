@@ -13,5 +13,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "prompt-sync": "^4.1.6",
+    "truffle-hdwallet-provider": "0.0.5"
   }
 }

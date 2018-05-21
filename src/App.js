@@ -10,22 +10,11 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.web3 = new Web3(Web3.givenProvider);
+    this.web3 = new Web3(Web3.givenProvider || process.env.REACT_APP_FALLBACK_PROVIDER);
     window.web3 = this.web3;
+    this.contract = new this.web3.eth.Contract(BurnContract.abi, process.env.REACT_APP_CONTRACT_ADDRESS);
 
-    this.web3.eth.getAccounts().then(accounts => {
-      this.web3.eth.defaultAccount = accounts[0]
-    });
-
-    console.log(process.env)
-    const addr = process.env.REACT_APP_CONTRACT_ADDRESS;
-    this.contract = new this.web3.eth.Contract(BurnContract.abi, addr);
-    window.contract = this.contract;
-
-    let ganache = new Web3('ws://localhost:7545');
-    let ganacheContract = new ganache.eth.Contract(BurnContract.abi, addr);
-    ganacheContract.events.BurnEvent({}, this.handleBurnEvent.bind(this));
-
+    this.setupEventListener();
     this.initBurns();
 
     this.state = {
@@ -33,13 +22,17 @@ class App extends Component {
     };
   }
 
+  setupEventListener() {
+    let web3 = new Web3(process.env.REACT_APP_WS_ADDRESS);
+    let contract = new web3.eth.Contract(BurnContract.abi, process.env.REACT_APP_CONTRACT_ADDRESS);
+    contract.events.BurnEvent({}, this.handleBurnEvent.bind(this));
+  }
+
   initBurns() {
     this.contract.methods.burnCount().call().then(count => {
       for(let i = 0; i < count; i++) {
         this.contract.methods.burns(i).call().then(data => {
           this.addBurn(data);
-          console.log(`data for i: ${i} is:`);
-          console.log(data);
         });
       }
     });
@@ -58,23 +51,25 @@ class App extends Component {
   }
 
   handleBurnEvent(error, data) {
-    this.addBurn(data.returnValues);
+    if(data && data.returnValues) {
+      this.addBurn(data.returnValues);
+    }
   }
 
   burns() {
-    return this.state.burns.map(burn => {
+    return this.state.burns.map((burn, i) => {
       return (
-        <Burn burn={burn} />
+        <Burn burn={burn} key={i}/>
       );
     });
   }
 
   totalBurnt() {
-    return this.state.burns.reduce(function(sum, burn){ return sum + parseInt(burn.burntAmount)}, 0);
+    return this.state.burns.reduce(function(sum, burn){ return sum + parseInt(burn.burntAmount, 10)}, 0);
   }
 
   largestBurn() {
-    return Math.max(...this.state.burns.map(burn => parseInt(burn.burntAmount)));
+    return Math.max(...this.state.burns.map(burn => parseInt(burn.burntAmount, 10)));
   }
 
   render() {

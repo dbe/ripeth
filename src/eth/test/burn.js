@@ -7,9 +7,15 @@ async function weiSpentOnGas(result) {
 
 contract('Burn', function(accounts) {
   it("Works", async function() {
+    console.log("Starting up tests");
+
     const acctStartingBalance = web3.eth.getBalance(accounts[0]);
 
+    console.log("acctStartingBalance: ", acctStartingBalance);
+
     const instance = await BurnContract.deployed();
+    console.log("Instance: ", instance);
+
     const cStartingBalance = web3.eth.getBalance(instance.address);
 
     let burnEventResult;
