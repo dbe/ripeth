@@ -143,7 +143,7 @@ class App extends Component {
             <div className="col-contents">
               Made by dream.eth for the giggles.
             </div>
-            <div className="col-contents">
+            <div className="col-contents last">
               <p>Go ahead and burn it. No one will get it. I promise.</p>
               <p>Find the source code here</p>
               <p>At the moment, Ethereum is nothing but a parlor trick. A toy (Vitalik said it not me) So sometimes, you throw away toys.</p>
@@ -153,24 +153,52 @@ class App extends Component {
 
         <div className="col-md-6">
           <div className="inner">
-            <BurnForm
-              contract={this.contract}
-              selectedAddress={this.state.selectedAddress}
-              isMetaMask={this.state.isMetaMask}
-              addBurn={this.addBurn.bind(this)}
-            />
+            <div className="col-title lime">
+              <h1>ETH.RIP</h1>
+            </div>
+            <div className="col-contents">
+            ethereum smart contracts. what can we do with it? make tons of money ICOing or just burn it. We dont make any profits, we just want anarchy
+            </div>
+            <div className="col-contents last">
+              <BurnForm
+                contract={this.contract}
+                selectedAddress={this.state.selectedAddress}
+                isMetaMask={this.state.isMetaMask}
+                addBurn={this.addBurn.bind(this)}
+              />
+              <button type='button' id='burn-button' className='btn lime' data-toggle="modal" data-target="#burnModal">burn eth</button>
+            </div>
           </div>
         </div>
 
         <div className="col-md-3">
-          <div className="col-title">
-            <h1>Comments</h1>
-          </div>
           <div className="inner">
+            <div className="col-title">
+              <h1>Comments</h1>
+            </div>
             {this.burns()}
           </div>
         </div>
-
+        
+        <div class="modal fade" id="burnModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                ...
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
