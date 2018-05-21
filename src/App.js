@@ -11,15 +11,31 @@ class App extends Component {
     super(props);
 
     this.web3 = new Web3(Web3.givenProvider || process.env.REACT_APP_FALLBACK_PROVIDER);
-    window.web3 = this.web3;
     this.contract = new this.web3.eth.Contract(BurnContract.abi, process.env.REACT_APP_CONTRACT_ADDRESS);
+
+    this.state = {
+      isMetaMask: this.web3.currentProvider.isMetaMask,
+      burns: []
+    }
+
+    if(this.state.isMetaMask) {
+      let configStore = this.web3.currentProvider.publicConfigStore;
+      configStore.on('update', this.updateMetaMaskState.bind(this));
+
+      this.state.selectedAddress = configStore.getState().selectedAddress;
+      this.state.networkVersion = configStore.getState().networkVersion;
+    }
+
 
     this.setupEventListener();
     this.initBurns();
+  }
 
-    this.state = {
-      burns: []
-    };
+  updateMetaMaskState(config) {
+    this.setState({
+      selectedAddress: config.selectedAddress,
+      networkVersion: config.networkVersion
+    });
   }
 
   setupEventListener() {
@@ -72,19 +88,33 @@ class App extends Component {
     return Math.max(...this.state.burns.map(burn => parseInt(burn.burntAmount, 10)));
   }
 
+  renderPage() {
+    if(this.state.isMetaMask && this.state.networkVersion !== "3") {
+      return (
+        <p>Please switch to the testnet</p>
+      );
+    } else {
+      return (
+        <div>
+          <h1>Burns</h1>
+          <div className="burn-stats">
+            <p>Number of burns: {this.state.burns.length}</p>
+            <p>Total Burnt: {this.totalBurnt()}</p>
+            <p>Largest Burn: {this.largestBurn()}</p>
+          </div>
+          <ul>
+            {this.burns()}
+          </ul>
+          <BurnForm contract={this.contract} web3={this.web3} selectedAddress={this.state.selectedAddress} isMetaMask={this.state.isMetaMask} />
+        </div>
+      );
+    }
+  }
+
   render() {
     return (
       <div className="App">
-        <h1>Burns</h1>
-        <div className="burn-stats">
-          <p>Number of burns: {this.state.burns.length}</p>
-          <p>Total Burnt: {this.totalBurnt()}</p>
-          <p>Largest Burn: {this.largestBurn()}</p>
-        </div>
-        <ul>
-          {this.burns()}
-        </ul>
-        <BurnForm contract={this.contract} web3={this.web3}/>
+        {this.renderPage()}
       </div>
     );
   }

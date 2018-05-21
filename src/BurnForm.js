@@ -4,26 +4,6 @@ class BurnForm extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
-
-    this.state = {
-      isMetaMask: this.props.web3.currentProvider.isMetaMask
-    }
-
-    if(this.state.isMetaMask) {
-      let configStore = this.props.web3.currentProvider.publicConfigStore;
-      configStore.on('update', this.updateState.bind(this));
-
-      let configState = configStore.getState();
-      this.state.selectedAddress = configState.selectedAddress;
-      this.state.networkVersion = configState.networkVersion;
-    }
-  }
-
-  updateState(config) {
-    this.setState({
-      selectedAddress: config.selectedAddress,
-      networkVersion: config.networkVersion
-    });
   }
 
   handleSubmit(event) {
@@ -33,7 +13,7 @@ class BurnForm extends React.Component {
 
   burn(message, amount) {
     this.props.contract.methods.burn(message).send({
-      from: this.state.selectedAccount,
+      from: this.props.selectedAddress,
       value: amount,
       gas: 200000
     })
@@ -69,14 +49,13 @@ class BurnForm extends React.Component {
   }
 
   render() {
-    if(this.state.isMetaMask) {
-      if(this.state.selectedAddress === undefined) {
-        return this.renderNoAccounts();
-      } else {
-        return this.renderForm();
-      }
-    } else {
+    console.log("selectedAddress: ", this.props.selectedAddress);
+    if(!this.props.isMetaMask) {
       return this.renderGetMetaMask();
+    } else if(this.props.selectedAddress === undefined) {
+      return this.renderNoAccounts();
+    } else {
+      return this.renderForm();
     }
   }
 }
