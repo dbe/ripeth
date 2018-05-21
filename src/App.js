@@ -12,6 +12,7 @@ class App extends Component {
 
     console.log("process.env: ", process.env);
 
+    
     this.web3 = new Web3(Web3.givenProvider || process.env.REACT_APP_FALLBACK_PROVIDER);
     window.web3 = this.web3;
     this.contract = new this.web3.eth.Contract(BurnContract.abi, process.env.REACT_APP_CONTRACT_ADDRESS);
