@@ -160,13 +160,8 @@ class App extends Component {
             ethereum smart contracts. what can we do with it? make tons of money ICOing or just burn it. We dont make any profits, we just want anarchy
             </div>
             <div className="col-contents last">
-              <BurnForm
-                contract={this.contract}
-                selectedAddress={this.state.selectedAddress}
-                isMetaMask={this.state.isMetaMask}
-                addBurn={this.addBurn.bind(this)}
-              />
-              <button type='button' id='burn-button' className='btn lime' data-toggle="modal" data-target="#burnModal">burn eth</button>
+
+              <button type='button' id="burn-eth-button" className='btn lime burn-button' data-toggle="modal" data-target="#burnModal">burn eth</button>
             </div>
           </div>
         </div>
@@ -179,22 +174,23 @@ class App extends Component {
             {this.burns()}
           </div>
         </div>
-        
+
         <div class="modal fade" id="burnModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">time to burn</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body">
-                ...
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <BurnForm
+                  contract={this.contract}
+                  selectedAddress={this.state.selectedAddress}
+                  isMetaMask={this.state.isMetaMask}
+                  addBurn={this.addBurn.bind(this)}
+                />
               </div>
             </div>
           </div>

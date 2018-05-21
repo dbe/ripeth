@@ -30,12 +30,15 @@ class BurnForm extends React.Component {
   renderForm() {
     return (
       <form onSubmit={this.handleSubmit} >
-        <label>Message:</label>
-        <input type="text" ref={(input) => this.message = input} />
-
-        <label>Amount:</label>
-        <input type="text" ref={(input) => this.amount = input} />
-        <input type="submit" value="Submit" />
+        <div className="form-group">
+          <input type="text" placeholder="amount of ethereum" ref={(input) => this.amount = input} />
+        </div>
+        <div className="form-group">
+          <textarea type="text" placeholder="message" ref={(input) => this.message = input} />
+        </div>
+        <div className="form-group">
+          <input className="burn-button lime" type="submit" value="burn it" />
+        </div>
       </form>
     );
   }
