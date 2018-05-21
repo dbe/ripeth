@@ -12,11 +12,19 @@ class BurnForm extends React.Component {
   }
 
   burn(message, amount) {
-    this.props.contract.methods.burn(message).send({
-      from: this.props.selectedAddress,
-      value: amount,
+    let burn = {
+      message: message,
+      burnerAddress: this.props.selectedAddress,
+      burntAmount: amount
+    };
+
+    this.props.contract.methods.burn(burn.message).send({
+      from: burn.burnerAddress,
+      value: burn.burntAmount,
       gas: 200000
-    })
+    }).on('transactionHash', hash => {
+      this.props.addBurn(burn, hash);
+    });
   }
 
   renderForm() {

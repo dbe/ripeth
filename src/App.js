@@ -26,9 +26,9 @@ class App extends Component {
       this.state.networkVersion = configStore.getState().networkVersion;
     }
 
-
     this.setupEventListener();
     this.initBurns();
+    this.alreadyRendered = {};
   }
 
   updateMetaMaskState(config) {
@@ -54,7 +54,13 @@ class App extends Component {
     });
   }
 
-  addBurn(burn) {
+  //Include transactionHash if you are adding burn due to a user triggered burn.
+  //This will ensure the element is not rendered again when picked up from the event feed.
+  addBurn(burn, transactionHash) {
+    if(transactionHash !== undefined) {
+      this.alreadyRendered[transactionHash] = true;
+    }
+
     const newBurn = {
       message: burn.message,
       burnerAddress: burn.burnerAddress,
@@ -67,7 +73,13 @@ class App extends Component {
   }
 
   handleBurnEvent(error, data) {
-    if(data && data.returnValues) {
+    if(data === undefined) {
+      return;
+    }
+
+    if(this.alreadyRendered[data.transactionHash]) {
+      this.alreadyRendered[data.transactionHash] = undefined;
+    } else {
       this.addBurn(data.returnValues);
     }
   }
@@ -89,7 +101,7 @@ class App extends Component {
   }
 
   renderPage() {
-    if(this.state.isMetaMask && this.state.networkVersion !== "3") {
+    if(process.env.NODE_ENV !== 'development' && this.state.isMetaMask && this.state.networkVersion !== "3") {
       return (
         <p>Please switch to the testnet</p>
       );
@@ -105,7 +117,12 @@ class App extends Component {
           <ul>
             {this.burns()}
           </ul>
-          <BurnForm contract={this.contract} web3={this.web3} selectedAddress={this.state.selectedAddress} isMetaMask={this.state.isMetaMask} />
+          <BurnForm
+            contract={this.contract}
+            selectedAddress={this.state.selectedAddress}
+            isMetaMask={this.state.isMetaMask}
+            addBurn={this.addBurn.bind(this)}
+          />
         </div>
       );
     }
