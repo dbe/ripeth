@@ -4,6 +4,26 @@ class BurnForm extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
+
+    this.state = {
+      isMetaMask: this.props.web3.currentProvider.isMetaMask
+    }
+
+    if(this.state.isMetaMask) {
+      let configStore = this.props.web3.currentProvider.publicConfigStore;
+      configStore.on('update', this.updateState.bind(this));
+
+      let configState = configStore.getState();
+      this.state.selectedAddress = configState.selectedAddress;
+      this.state.networkVersion = configState.networkVersion;
+    }
+  }
+
+  updateState(config) {
+    this.setState({
+      selectedAddress: config.selectedAddress,
+      networkVersion: config.networkVersion
+    });
   }
 
   handleSubmit(event) {
@@ -11,17 +31,15 @@ class BurnForm extends React.Component {
     this.burn(this.message.value, this.amount.value);
   }
 
-  async burn(message, amount) {
-    let accounts = await this.props.web3.eth.getAccounts();
-
+  burn(message, amount) {
     this.props.contract.methods.burn(message).send({
-      from: accounts[0],
+      from: this.state.selectedAccount,
       value: amount,
       gas: 200000
     })
   }
 
-  render() {
+  renderForm() {
     return (
       <form onSubmit={this.handleSubmit} >
         <label>Message:</label>
@@ -32,6 +50,34 @@ class BurnForm extends React.Component {
         <input type="submit" value="Submit" />
       </form>
     );
+  }
+
+  renderGetMetaMask() {
+    return (
+      <div>
+        <p>Metamask is not installed</p>
+      </div>
+    );
+  }
+
+  renderNoAccounts() {
+    return (
+      <div>
+        <p>You need to create an account in Metamask before continuing.</p>
+      </div>
+    );
+  }
+
+  render() {
+    if(this.state.isMetaMask) {
+      if(this.state.selectedAddress === undefined) {
+        return this.renderNoAccounts();
+      } else {
+        return this.renderForm();
+      }
+    } else {
+      return this.renderGetMetaMask();
+    }
   }
 }
 
