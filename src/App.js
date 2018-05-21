@@ -85,9 +85,11 @@ class App extends Component {
   }
 
   burns() {
-    return this.state.burns.map((burn, i) => {
+    return this.state.burns.reverse().map((burn, i) => {
       return (
-        <Burn burn={burn} key={i}/>
+        <div className="col-contents">
+          <Burn burn={burn} key={i}/>
+        </div>
       );
     });
   }
@@ -128,10 +130,55 @@ class App extends Component {
     }
   }
 
+  renderFake() {
+    return (
+      <div className="row">
+        <div className="col-md-3">
+          <div className="inner">
+            <div className="col-title">
+              <h1>
+                About
+              </h1>
+            </div>
+            <div className="col-contents">
+              Made by dream.eth for the giggles.
+            </div>
+            <div className="col-contents">
+              <p>Go ahead and burn it. No one will get it. I promise.</p>
+              <p>Find the source code here</p>
+              <p>At the moment, Ethereum is nothing but a parlor trick. A toy (Vitalik said it not me) So sometimes, you throw away toys.</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="col-md-6">
+          <div className="inner">
+            <BurnForm
+              contract={this.contract}
+              selectedAddress={this.state.selectedAddress}
+              isMetaMask={this.state.isMetaMask}
+              addBurn={this.addBurn.bind(this)}
+            />
+          </div>
+        </div>
+
+        <div className="col-md-3">
+          <div className="col-title">
+            <h1>Comments</h1>
+          </div>
+          <div className="inner">
+            {this.burns()}
+          </div>
+        </div>
+
+      </div>
+    );
+  }
+
   render() {
     return (
-      <div className="App">
-        {this.renderPage()}
+      <div className="App container">
+        {this.renderFake()}
       </div>
     );
   }

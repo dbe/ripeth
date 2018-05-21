@@ -1,10 +1,18 @@
-.App {
-  text-align: center;
+.burn p {
+  margin-bottom: 3px;
+}
+.inner {
+  border: 3px solid black;
 }
 
-.burn {
-  width: 300px;
-  border: 1px solid black;
-  margin: 20px;
-  display: inline-block;
+.col-title {
+  border-bottom: 3px solid black;
+  margin-bottom: 0px;
+  background-color: black;
+  color: white;
+}
+
+.col-contents {
+  border-bottom: 3px solid black;
+  padding: 5px;
 }
