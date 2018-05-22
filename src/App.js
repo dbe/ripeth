@@ -87,8 +87,8 @@ class App extends Component {
   burns() {
     return this.state.burns.reverse().map((burn, i) => {
       return (
-        <div className="col-contents">
-          <Burn burn={burn} key={i}/>
+        <div className="col-contents" key={i}>
+          <Burn burn={burn}/>
         </div>
       );
     });
@@ -136,9 +136,7 @@ class App extends Component {
         <div className="col-md-3">
           <div className="inner">
             <div className="col-title">
-              <h1>
-                About
-              </h1>
+              <h1>ABOUT</h1>
             </div>
             <div className="col-contents">
               Made by dream.eth for the giggles.
@@ -169,22 +167,22 @@ class App extends Component {
         <div className="col-md-3">
           <div className="inner">
             <div className="col-title">
-              <h1>Comments</h1>
+              <h1>COMMENTS</h1>
             </div>
             {this.burns()}
           </div>
         </div>
 
-        <div class="modal fade" id="burnModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">time to burn</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <div className="modal fade" id="burnModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="exampleModalLabel">time to burn</h5>
+                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body">
+              <div className="modal-body">
                 <BurnForm
                   contract={this.contract}
                   selectedAddress={this.state.selectedAddress}
@@ -201,7 +199,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App container">
+      <div className="App container-fluid">
         {this.renderFake()}
       </div>
     );

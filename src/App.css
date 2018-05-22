@@ -1,3 +1,24 @@
+* {
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+h1 {
+  font-weight: bold;
+}
+
+::-webkit-scrollbar {
+  width: 24px;
+}
+
+::-webkit-scrollbar-track {
+  border-left: 3px solid black;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #58FD34;
+  border-left: 3px solid black;
+}
+
 .modal-header {
   background-color: black;
   color: white;
@@ -46,7 +67,7 @@
 .inner {
   border: 3px solid black;
   height: 100vh;
-  overflow: scroll;
+  overflow: auto;
 }
 
 .col-title {
