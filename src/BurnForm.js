@@ -60,7 +60,6 @@ class BurnForm extends React.Component {
   }
 
   render() {
-    console.log("selectedAddress: ", this.props.selectedAddress);
     if(!this.props.isMetaMask) {
       return this.renderGetMetaMask();
     } else if(this.props.selectedAddress === undefined) {

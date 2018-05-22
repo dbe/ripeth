@@ -6,6 +6,8 @@ h1 {
   font-weight: bold;
 }
 
+
+
 ::-webkit-scrollbar {
   width: 24px;
 }
@@ -17,6 +19,13 @@ h1 {
 ::-webkit-scrollbar-thumb {
   background: #58FD34;
   border-left: 3px solid black;
+}
+
+
+
+
+#burn-modal {
+  text-align: center;
 }
 
 .modal-header {
@@ -34,11 +43,23 @@ h1 {
   opacity: 1
 }
 
+.modal-content {
+  min-height: 300px;
+}
+
+.modal-main-text {
+  margin-bottom: 50px;
+  margin-top: 50px;
+}
+
+
 .burn-button {
   font-size: 34px;
-  width: 50%;
   padding: 10px;
   border: 3px solid black;
+  border-radius: 0;
+  width: 50%;
+  padding: 0;
 }
 
 #burn-eth-button {
@@ -46,10 +67,16 @@ h1 {
   top: 50px;
   font-weight: bold;
   font-style: italic;
+  padding: 10px;
 }
 
 .burn-button:active {
   background-color: black;
+}
+
+.lime {
+  background-color: #58FD34;
+  color: black;
 }
 
 .col-contents {
@@ -78,10 +105,4 @@ h1 {
   background-color: black;
   color: white;
   text-align: center;
-}
-
-
-.lime {
-  background-color: #58FD34;
-  color: black;
 }

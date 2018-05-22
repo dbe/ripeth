@@ -3,8 +3,8 @@ import Web3 from 'web3';
 
 import './App.css';
 import Burn from './Burn.js';
-import BurnForm from './BurnForm.js';
 import BurnContract from './eth/build/contracts/BurnContract.json';
+import BurnModal from './BurnModal';
 
 class App extends Component {
   constructor(props) {
@@ -119,12 +119,6 @@ class App extends Component {
           <ul>
             {this.burns()}
           </ul>
-          <BurnForm
-            contract={this.contract}
-            selectedAddress={this.state.selectedAddress}
-            isMetaMask={this.state.isMetaMask}
-            addBurn={this.addBurn.bind(this)}
-          />
         </div>
       );
     }
@@ -162,7 +156,7 @@ class App extends Component {
           </div>
           <div className="col-contents last">
 
-            <button type='button' id="burn-eth-button" className='btn lime burn-button' data-toggle="modal" data-target="#burnModal">burn eth</button>
+            <button type='button' id="burn-eth-button" className='btn lime burn-button' data-toggle="modal" data-target="#burn-modal">burn eth</button>
           </div>
         </div>
       </div>
@@ -184,27 +178,14 @@ class App extends Component {
 
   renderModal() {
     return (
-      <div className="modal fade" id="burnModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">time to burn</h5>
-              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <BurnForm
-                contract={this.contract}
-                selectedAddress={this.state.selectedAddress}
-                isMetaMask={this.state.isMetaMask}
-                addBurn={this.addBurn.bind(this)}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+      <BurnModal
+        contract={this.contract}
+        selectedAddress={this.state.selectedAddress}
+        isMetaMask={this.state.isMetaMask}
+        networkVersion={this.state.networkVersion}
+        addBurn={this.addBurn.bind(this)}
+      />
+    )
   }
 
   render() {
