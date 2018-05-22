@@ -130,66 +130,76 @@ class App extends Component {
     }
   }
 
-  renderFake() {
+  renderAbout() {
     return (
-      <div className="row">
-        <div className="col-md-3">
-          <div className="inner">
-            <div className="col-title">
-              <h1>ABOUT</h1>
-            </div>
-            <div className="col-contents">
-              Made by dream.eth for the giggles.
-            </div>
-            <div className="col-contents last">
-              <p>Go ahead and burn it. No one will get it. I promise.</p>
-              <p>Find the source code here</p>
-              <p>At the moment, Ethereum is nothing but a parlor trick. A toy (Vitalik said it not me) So sometimes, you throw away toys.</p>
-            </div>
+      <div className="col-md-3">
+        <div className="inner">
+          <div className="col-title">
+            <h1>ABOUT</h1>
+          </div>
+          <div className="col-contents">
+            Made by dream.eth for the giggles.
+          </div>
+          <div className="col-contents last">
+            <p>Go ahead and burn it. No one will get it. I promise.</p>
+            <p>Find the source code here</p>
+            <p>At the moment, Ethereum is nothing but a parlor trick. A toy (Vitalik said it not me) So sometimes, you throw away toys.</p>
           </div>
         </div>
+      </div>
+    );
+  }
 
-        <div className="col-md-6">
-          <div className="inner">
-            <div className="col-title lime">
-              <h1>ETH.RIP</h1>
-            </div>
-            <div className="col-contents">
-            ethereum smart contracts. what can we do with it? make tons of money ICOing or just burn it. We dont make any profits, we just want anarchy
-            </div>
-            <div className="col-contents last">
+  renderFire() {
+    return (
+      <div className="col-md-6">
+        <div className="inner">
+          <div className="col-title lime">
+            <h1>ETH.RIP</h1>
+          </div>
+          <div className="col-contents">
+          ethereum smart contracts. what can we do with it? make tons of money ICOing or just burn it. We dont make any profits, we just want anarchy
+          </div>
+          <div className="col-contents last">
 
-              <button type='button' id="burn-eth-button" className='btn lime burn-button' data-toggle="modal" data-target="#burnModal">burn eth</button>
-            </div>
+            <button type='button' id="burn-eth-button" className='btn lime burn-button' data-toggle="modal" data-target="#burnModal">burn eth</button>
           </div>
         </div>
+      </div>
+    );
+  }
 
-        <div className="col-md-3">
-          <div className="inner">
-            <div className="col-title">
-              <h1>COMMENTS</h1>
-            </div>
-            {this.burns()}
+  renderComments() {
+    return (
+      <div className="col-md-3">
+        <div className="inner">
+          <div className="col-title">
+            <h1>COMMENTS</h1>
           </div>
+          {this.burns()}
         </div>
+      </div>
+    );
+  }
 
-        <div className="modal fade" id="burnModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div className="modal-dialog" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLabel">time to burn</h5>
-                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div className="modal-body">
-                <BurnForm
-                  contract={this.contract}
-                  selectedAddress={this.state.selectedAddress}
-                  isMetaMask={this.state.isMetaMask}
-                  addBurn={this.addBurn.bind(this)}
-                />
-              </div>
+  renderModal() {
+    return (
+      <div className="modal fade" id="burnModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">time to burn</h5>
+              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              <BurnForm
+                contract={this.contract}
+                selectedAddress={this.state.selectedAddress}
+                isMetaMask={this.state.isMetaMask}
+                addBurn={this.addBurn.bind(this)}
+              />
             </div>
           </div>
         </div>
@@ -200,7 +210,12 @@ class App extends Component {
   render() {
     return (
       <div className="App container-fluid">
-        {this.renderFake()}
+        <div className="row">
+          { this.renderAbout() }
+          { this.renderFire() }
+          { this.renderComments() }
+          { this.renderModal() }
+        </div>
       </div>
     );
   }
