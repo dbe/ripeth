@@ -126,19 +126,17 @@ class App extends Component {
 
   renderAbout() {
     return (
-      <div className="col-md-3">
-        <div className="inner">
-          <div className="col-title">
-            <h1>ABOUT</h1>
-          </div>
-          <div className="col-contents">
-            Made by dream.eth for the giggles.
-          </div>
-          <div className="col-contents last">
-            <p>Go ahead and burn it. No one will get it. I promise.</p>
-            <p>Find the source code here</p>
-            <p>At the moment, Ethereum is nothing but a parlor trick. A toy (Vitalik said it not me) So sometimes, you throw away toys.</p>
-          </div>
+      <div className="inner">
+        <div className="col-title">
+          <h1>ABOUT</h1>
+        </div>
+        <div className="col-contents">
+          Made by dream.eth for the giggles.
+        </div>
+        <div className="col-contents last">
+          <p>Go ahead and burn it. No one will get it. I promise.</p>
+          <p>Find the source code here</p>
+          <p>At the moment, Ethereum is nothing but a parlor trick. A toy (Vitalik said it not me) So sometimes, you throw away toys.</p>
         </div>
       </div>
     );
@@ -146,18 +144,16 @@ class App extends Component {
 
   renderFire() {
     return (
-      <div className="col-md-6">
-        <div className="inner">
-          <div className="col-title lime">
-            <h1>ETH.RIP</h1>
-          </div>
-          <div className="col-contents">
-          ethereum smart contracts. what can we do with it? make tons of money ICOing or just burn it. We dont make any profits, we just want anarchy
-          </div>
-          <div className="col-contents last">
+      <div className="inner">
+        <div className="col-title lime">
+          <h1>ETH.RIP</h1>
+        </div>
+        <div className="col-contents">
+        ethereum smart contracts. what can we do with it? make tons of money ICOing or just burn it. We dont make any profits, we just want anarchy
+        </div>
+        <div className="col-contents last">
 
-            <button type='button' id="burn-eth-button" className='btn lime burn-button' data-toggle="modal" data-target="#burn-modal">burn eth</button>
-          </div>
+          <button type='button' id="burn-eth-button" className='btn lime burn-button' data-toggle="modal" data-target="#burn-modal">burn eth</button>
         </div>
       </div>
     );
@@ -165,13 +161,11 @@ class App extends Component {
 
   renderComments() {
     return (
-      <div className="col-md-3">
-        <div className="inner">
-          <div className="col-title">
-            <h1>COMMENTS</h1>
-          </div>
-          {this.burns()}
+      <div className="inner">
+        <div className="col-title">
+          <h1>COMMENTS</h1>
         </div>
+        {this.burns()}
       </div>
     );
   }
@@ -185,16 +179,26 @@ class App extends Component {
         networkVersion={this.state.networkVersion}
         addBurn={this.addBurn.bind(this)}
       />
-    )
+    );
   }
 
   render() {
     return (
       <div className="App container-fluid">
         <div className="row">
-          { this.renderAbout() }
-          { this.renderFire() }
-          { this.renderComments() }
+
+          <div className="col-md-3 order-2 order-md-1">
+            { this.renderAbout() }
+          </div>
+
+          <div className="col-md-6 order-1 order-md-2">
+            { this.renderFire() }
+          </div>
+
+          <div className="col-md-3 order-last">
+            { this.renderComments() }
+          </div>
+
           { this.renderModal() }
         </div>
       </div>
