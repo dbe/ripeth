@@ -8,19 +8,19 @@ class BurnForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.burn(this.message.value, this.amount.value);
+    this.burn(this.amount.value, this.name.value, this.message.value);
   }
 
-  burn(message, amount) {
+  burn(amount, name, message) {
     let burn = {
-      message: message,
+      message: message + ":" + name,
       burnerAddress: this.props.selectedAddress,
       burntAmount: amount
     };
 
     this.props.contract.methods.burn(burn.message).send({
       from: burn.burnerAddress,
-      value: burn.burntAmount,
+      value: burn.burntAmount * 1000000000000000000,
       gas: 200000
     }).on('transactionHash', hash => {
       this.props.addBurn(burn, hash);
@@ -29,12 +29,15 @@ class BurnForm extends React.Component {
 
   renderForm() {
     return (
-      <form onSubmit={this.handleSubmit} >
+      <form id="burn-form" onSubmit={this.handleSubmit} >
         <div className="form-group">
           <input type="text" placeholder="amount of ethereum" ref={(input) => this.amount = input} />
         </div>
         <div className="form-group">
-          <textarea type="text" placeholder="message" ref={(input) => this.message = input} />
+          <input type="text" placeholder="name..." ref={(input) => this.name = input} />
+        </div>
+        <div className="form-group">
+          <textarea type="text" placeholder="message..." ref={(input) => this.message = input} />
         </div>
         <div className="form-group">
           <input className="burn-button lime" type="submit" value="burn it" />

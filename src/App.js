@@ -61,8 +61,11 @@ class App extends Component {
       this.alreadyRendered[transactionHash] = true;
     }
 
+    const [message, name] = this.parseBurnMessage(burn.message);
+
     const newBurn = {
-      message: burn.message,
+      message: message,
+      name: name,
       burnerAddress: burn.burnerAddress,
       burntAmount: burn.burntAmount
     };
@@ -70,6 +73,20 @@ class App extends Component {
     const burns = this.state.burns.slice();
     burns.push(newBurn);
     this.setState({burns});
+  }
+
+  //TODO: This is a bit messy as it handles multiple edge cases.
+  // Try to simplify by fixing the data side of thigns, and potentially factor this out
+  parseBurnMessage(message) {
+    const i = message.lastIndexOf(':');
+
+    if(i < 0) {
+      return [message, "anon"];
+    } else if(i === message.length - 1) {
+      return [message.substring(0, i), "anon"];
+    } else {
+      return [message.substring(0, i), message.substring(i + 1)];
+    }
   }
 
   handleBurnEvent(error, data) {
@@ -88,7 +105,7 @@ class App extends Component {
     return this.state.burns.reverse().map((burn, i) => {
       return (
         <div className="col-contents" key={i}>
-          <Burn burn={burn}/>
+          <Burn burn={burn} fromWei={this.web3.utils.fromWei}/>
         </div>
       );
     });

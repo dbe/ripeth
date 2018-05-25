@@ -60,7 +60,6 @@ h1 {
   padding: 0;
 }
 
-
 .burn-button {
   font-size: 34px;
   font-style: italic;
@@ -122,4 +121,13 @@ h1 {
   color: black;
   text-align: left;
   padding: 10px;
+}
+
+#burn-form {
+  text-align: left;
+  margin-left: 10%
+}
+
+#burn-form input, textarea {
+  width: 50%;
 }
