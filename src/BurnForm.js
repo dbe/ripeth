@@ -43,31 +43,10 @@ class BurnForm extends React.Component {
     );
   }
 
-  renderGetMetaMask() {
-    return (
-      <div>
-        <p>Metamask is not installed</p>
-      </div>
-    );
-  }
-
-  renderNoAccounts() {
-    return (
-      <div>
-        <p>You need to create an account in Metamask before continuing.</p>
-      </div>
-    );
-  }
-
   render() {
-    if(!this.props.isMetaMask) {
-      return this.renderGetMetaMask();
-    } else if(this.props.selectedAddress === undefined) {
-      return this.renderNoAccounts();
-    } else {
-      return this.renderForm();
-    }
+    return this.renderForm();
   }
+
 }
 
 export default BurnForm;

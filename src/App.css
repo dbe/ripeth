@@ -11,7 +11,6 @@ h1 {
 }
 
 
-
 ::-webkit-scrollbar {
   width: 24px;
 }
@@ -24,7 +23,6 @@ h1 {
   background: #58FD34;
   border-left: 3px solid black;
 }
-
 
 
 
@@ -44,10 +42,6 @@ h1 {
 
 .modal-header {
   padding: 0;
-}
-
-.modal-content {
-  min-height: 300px;
 }
 
 .modal-main-text {
@@ -73,8 +67,9 @@ h1 {
   padding: 10px;
   border: 3px solid black;
   border-radius: 0;
-  width: 50%;
+  width: 40%;
   padding: 0;
+  margin: 10px;
 }
 
 #burn-eth-button {

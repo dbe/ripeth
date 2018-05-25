@@ -5,6 +5,10 @@ import BurnForm from './BurnForm.js';
 class BurnModal extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      confirmed: false
+    }
   }
 
   render() {
@@ -42,17 +46,34 @@ class BurnModal extends React.Component {
           this.renderChangeNetwork()
         ]
       } else {
-        return [
-          "time to burn",
-          <BurnForm
-            contract={this.props.contract}
-            selectedAddress={this.props.selectedAddress}
-            isMetaMask={this.props.isMetaMask}
-            addBurn={this.props.addBurn}
-          />
-        ];
+        if(this.state.confirmed) {
+          return [
+            "time to burn",
+            <BurnForm
+              contract={this.props.contract}
+              selectedAddress={this.props.selectedAddress}
+              isMetaMask={this.props.isMetaMask}
+              addBurn={this.props.addBurn}
+            />
+          ];
+        } else {
+          return [
+            "Are you sure?",
+            this.renderConfirmation()
+          ]
+        }
       }
     }
+  }
+
+  renderConfirmation() {
+    return (
+      <div>
+        <p>Burning your ethereum means you will never get it back. You are quite literally throwing away your money. Check the <a href="#">source code</a></p>
+        <button type='button' className='btn lime burn-button' data-toggle="modal" data-target="#burn-modal">close</button>
+        <button type='button' className='btn lime burn-button' onClick={() => this.setState({confirmed: true})}>continue</button>
+      </div>
+    );
   }
 
   renderNeedsMetamask() {

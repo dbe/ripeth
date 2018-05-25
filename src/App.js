@@ -24,7 +24,6 @@ class App extends Component {
 
       this.state.selectedAddress = configStore.getState().selectedAddress;
       this.state.networkVersion = configStore.getState().networkVersion;
-      console.log(configStore.getState());
     }
 
     this.setupEventListener();
