@@ -2,6 +2,10 @@
   font-family: 'IBM Plex Mono', monospace;
 }
 
+p {
+  font-weight: 500;
+}
+
 h1 {
   font-weight: bold;
 }
@@ -38,9 +42,8 @@ h1 {
   width: 100%;
 }
 
-.modal-header button {
-  background-color: #58FD34;
-  opacity: 1
+.modal-header {
+  padding: 0;
 }
 
 .modal-content {
@@ -52,9 +55,21 @@ h1 {
   margin-top: 50px;
 }
 
+.modal-header .close {
+  background-color: #58FD34;
+  opacity: 1;
+  font-weight: 100;
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+}
+
 
 .burn-button {
   font-size: 34px;
+  font-style: italic;
   padding: 10px;
   border: 3px solid black;
   border-radius: 0;
@@ -105,4 +120,11 @@ h1 {
   background-color: black;
   color: white;
   text-align: center;
+}
+
+#eth-rip-title {
+  background-color: #58FD34;
+  color: black;
+  text-align: left;
+  padding: 10px;
 }

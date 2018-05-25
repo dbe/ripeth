@@ -24,6 +24,7 @@ class App extends Component {
 
       this.state.selectedAddress = configStore.getState().selectedAddress;
       this.state.networkVersion = configStore.getState().networkVersion;
+      console.log(configStore.getState());
     }
 
     this.setupEventListener();
@@ -131,7 +132,9 @@ class App extends Component {
           <h1>ABOUT</h1>
         </div>
         <div className="col-contents">
-          Made by dream.eth for the giggles.
+          <p>
+            Made by dream.eth for the giggles.
+          </p>
         </div>
         <div className="col-contents last">
           <p>Go ahead and burn it. No one will get it. I promise.</p>
@@ -145,11 +148,13 @@ class App extends Component {
   renderFire() {
     return (
       <div className="inner">
-        <div className="col-title lime">
-          <h1>ETH.RIP</h1>
+        <div className="col-title" id="eth-rip-title">
+          <h1>ETH.RIP //</h1>
         </div>
         <div className="col-contents">
-        ethereum smart contracts. what can we do with it? make tons of money ICOing or just burn it. We dont make any profits, we just want anarchy
+          <p>
+            ethereum smart contracts. what can we do with it? make tons of money ICOing or just burn it. We dont make any profits, we just want anarchy
+          </p>
         </div>
         <div className="col-contents last">
 

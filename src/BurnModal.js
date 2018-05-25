@@ -36,7 +36,7 @@ class BurnModal extends React.Component {
         this.renderNeedsMetamask()
       ];
     } else {
-      if(this.props.networkVersion !== "3") {
+      if(this.props.networkVersion !== process.env.REACT_APP_TARGET_NETWORK) {
         return [
           "Oops",
           this.renderChangeNetwork()
