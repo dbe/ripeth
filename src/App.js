@@ -114,15 +114,10 @@ class App extends Component {
 
   totalBurnt() {
     let wei = this.state.burns.reduce(function(sum, burn) {
-      console.log("sum: ", sum);
       return sum.plus(burn.burntAmount);
     }, new BigNumber(0));
 
     return this.web3.utils.fromWei(wei.toString(), 'ether');
-  }
-
-  largestBurn() {
-    return Math.max(...this.state.burns.map(burn => parseInt(burn.burntAmount, 10)));
   }
 
   renderAbout() {
@@ -138,7 +133,6 @@ class App extends Component {
         </div>
         <div className="col-contents last">
           <p>Go ahead and burn it. No one will get it. I promise.</p>
-          <p>Find the source code here</p>
           <p>At the moment, Ethereum is nothing but a parlor trick. A toy (Vitalik said it not me) So sometimes, you throw away toys.</p>
         </div>
       </div>
@@ -168,12 +162,18 @@ class App extends Component {
   }
 
   renderComments() {
+    let content = (this.state.isMetaMask && (this.state.networkVersion !== process.env.REACT_APP_TARGET_NETWORK)) ?
+      <p>Please connect to the Ropsten Test Network to load burns</p> :
+      this.burns();
+
     return (
       <div className="inner">
         <div className="col-title">
           <h1>COMMENTS</h1>
         </div>
-        {this.burns()}
+        <div className="col-contents last">
+          {content}
+        </div>
       </div>
     );
   }
