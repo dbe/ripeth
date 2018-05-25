@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Web3 from 'web3';
+import { BigNumber } from 'bignumber.js';
 
 import './App.css';
 import Burn from './Burn.js';
@@ -112,33 +113,16 @@ class App extends Component {
   }
 
   totalBurnt() {
-    return this.state.burns.reduce(function(sum, burn){ return sum + parseInt(burn.burntAmount, 10)}, 0);
+    let wei = this.state.burns.reduce(function(sum, burn) {
+      console.log("sum: ", sum);
+      return sum.plus(burn.burntAmount);
+    }, new BigNumber(0));
+
+    return this.web3.utils.fromWei(wei.toString(), 'ether');
   }
 
   largestBurn() {
     return Math.max(...this.state.burns.map(burn => parseInt(burn.burntAmount, 10)));
-  }
-
-  renderPage() {
-    if(process.env.NODE_ENV !== 'development' && this.state.isMetaMask && this.state.networkVersion !== "3") {
-      return (
-        <p>Please switch to the testnet</p>
-      );
-    } else {
-      return (
-        <div>
-          <h1>Burns</h1>
-          <div className="burn-stats">
-            <p>Number of burns: {this.state.burns.length}</p>
-            <p>Total Burnt: {this.totalBurnt()}</p>
-            <p>Largest Burn: {this.largestBurn()}</p>
-          </div>
-          <ul>
-            {this.burns()}
-          </ul>
-        </div>
-      );
-    }
   }
 
   renderAbout() {
@@ -173,6 +157,9 @@ class App extends Component {
           </p>
         </div>
         <div className="col-contents last">
+          <p>
+            Total Burnt: { this.totalBurnt() } eth
+          </p>
 
           <button type='button' id="burn-eth-button" className='btn lime burn-button' data-toggle="modal" data-target="#burn-modal">burn eth</button>
         </div>
@@ -199,6 +186,7 @@ class App extends Component {
         isMetaMask={this.state.isMetaMask}
         networkVersion={this.state.networkVersion}
         addBurn={this.addBurn.bind(this)}
+        toWei={this.web3.utils.toWei}
       />
     );
   }

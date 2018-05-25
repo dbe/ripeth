@@ -54,6 +54,7 @@ class BurnModal extends React.Component {
               selectedAddress={this.props.selectedAddress}
               isMetaMask={this.props.isMetaMask}
               addBurn={this.props.addBurn}
+              toWei={this.props.toWei}
             />
           ];
         } else {

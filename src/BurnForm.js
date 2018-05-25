@@ -20,7 +20,7 @@ class BurnForm extends React.Component {
 
     this.props.contract.methods.burn(burn.message).send({
       from: burn.burnerAddress,
-      value: burn.burntAmount * 1000000000000000000,
+      value: this.props.toWei(burn.burntAmount, 'ether'),
       gas: 200000
     }).on('transactionHash', hash => {
       this.props.addBurn(burn, hash);
