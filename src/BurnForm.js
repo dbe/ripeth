@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery';
 
 class BurnForm extends React.Component {
   constructor(props) {
@@ -15,15 +16,18 @@ class BurnForm extends React.Component {
     let burn = {
       message: message + ":" + name,
       burnerAddress: this.props.selectedAddress,
-      burntAmount: amount
+      burntAmount: this.props.toWei(amount, 'ether')
     };
 
     this.props.contract.methods.burn(burn.message).send({
       from: burn.burnerAddress,
-      value: this.props.toWei(burn.burntAmount, 'ether'),
+      value: burn.burntAmount,
       gas: 200000
     }).on('transactionHash', hash => {
       this.props.addBurn(burn, hash);
+      //TODO: Fix this
+      // console.log($('#burn-form'))
+      // $('#burn-form').modal('hide');
     });
   }
 
