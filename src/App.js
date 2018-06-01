@@ -45,6 +45,7 @@ class App extends Component {
     contract.events.BurnEvent({}, this.handleBurnEvent.bind(this));
   }
 
+  //TODO: Make sure these are coming in order and apply the correct key here too.
   initBurns() {
     this.contract.methods.burnCount().call().then(count => {
       for(let i = 0; i < count; i++) {

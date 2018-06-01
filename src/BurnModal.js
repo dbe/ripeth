@@ -39,31 +39,32 @@ class BurnModal extends React.Component {
         "Oops",
         this.renderNeedsMetamask()
       ];
+    } else if(this.props.selectedAddress === undefined) {
+      return [
+        "Oops",
+        this.renderNeedToLogin()
+      ];
+    } else if(this.props.networkVersion !== process.env.REACT_APP_TARGET_NETWORK) {
+      return [
+        "Oops",
+        this.renderChangeNetwork()
+      ]
+    } else if(this.state.confirmed) {
+      return [
+        "time to burn",
+        <BurnForm
+          contract={this.props.contract}
+          selectedAddress={this.props.selectedAddress}
+          isMetaMask={this.props.isMetaMask}
+          addBurn={this.props.addBurn}
+          toWei={this.props.toWei}
+        />
+      ];
     } else {
-      if(this.props.networkVersion !== process.env.REACT_APP_TARGET_NETWORK) {
-        return [
-          "Oops",
-          this.renderChangeNetwork()
-        ]
-      } else {
-        if(this.state.confirmed) {
-          return [
-            "time to burn",
-            <BurnForm
-              contract={this.props.contract}
-              selectedAddress={this.props.selectedAddress}
-              isMetaMask={this.props.isMetaMask}
-              addBurn={this.props.addBurn}
-              toWei={this.props.toWei}
-            />
-          ];
-        } else {
-          return [
-            "Are you sure?",
-            this.renderConfirmation()
-          ]
-        }
-      }
+      return [
+        "Are you sure?",
+        this.renderConfirmation()
+      ];
     }
   }
 
@@ -81,6 +82,15 @@ class BurnModal extends React.Component {
     return (
       <div>
         <p className="modal-main-text">You will need to download <a href="https://metamask.io/" target="_">metamask</a> to burn ethereum</p>
+        <button type='button' className='btn lime burn-button' data-toggle="modal" data-target="#burn-modal">ok</button>
+      </div>
+    );
+  }
+
+  renderNeedToLogin() {
+    return (
+      <div>
+        <p className="modal-main-text">Login to Metamask and make sure you create at least one account.</p>
         <button type='button' className='btn lime burn-button' data-toggle="modal" data-target="#burn-modal">ok</button>
       </div>
     );

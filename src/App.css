@@ -63,12 +63,10 @@ h1 {
 .burn-button {
   font-size: 34px;
   font-style: italic;
-  padding: 10px;
   border: 3px solid black;
   border-radius: 0;
-  width: 40%;
-  padding: 0;
   margin: 10px;
+  padding: 0px 30px 0px 30px;
 }
 
 #burn-eth-button {
@@ -76,7 +74,7 @@ h1 {
   top: 50px;
   font-weight: bold;
   font-style: italic;
-  padding: 10px;
+  padding: 10px 40px 10px 40px;
 }
 
 .burn-button:active {
@@ -104,7 +102,7 @@ h1 {
 
 .inner {
   border: 3px solid black;
-  height: 100vh;
+  height: 99vh;
   overflow: auto;
 }
 
