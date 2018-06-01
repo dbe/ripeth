@@ -115,7 +115,7 @@ class App extends Component {
   }
 
   burns() {
-    return this.state.burns.reverse().map((burn, i) => {
+    return this.state.burns.slice().reverse().map((burn, i) => {
       return (
         <div className="col-contents" key={i}>
           <Burn burn={burn} fromWei={this.web3.utils.fromWei}/>
