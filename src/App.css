@@ -145,6 +145,7 @@ h1 {
 #center-inner {
   background: black;
   position: relative;
+  overflow: hidden;
 }
 
 #fire-wrapper {
@@ -155,6 +156,15 @@ h1 {
 
 #fire-gif {
   width: 100%;
+  position: absolute;
+  bottom: -20px;
+}
+
+#coin-pile-png {
+  width: 60%;
+  position: absolute;
+  left: 20%;
+  bottom: 0;
 }
 
 #burn-form input, textarea {

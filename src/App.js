@@ -166,6 +166,7 @@ class App extends Component {
         </div>
         <div id="fire-wrapper">
           <img id="fire-gif" src="/fire.gif" />
+          <img id="coin-pile-png" src="/coin-pile.png" />
         </div>
       </div>
     );
