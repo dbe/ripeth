@@ -25,9 +25,8 @@ class BurnForm extends React.Component {
       gas: 200000
     }).on('transactionHash', hash => {
       this.props.addBurn(burn, hash);
-      //TODO: Fix this
-      // console.log($('#burn-form'))
-      // $('#burn-form').modal('hide');
+      $('#burn-form')[0].reset();
+      $('#close-modal').click();
     });
   }
 
