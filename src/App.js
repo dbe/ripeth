@@ -11,6 +11,7 @@ class App extends Component {
   constructor(props) {
     super(props);
 
+    this.buildBurn = this.buildBurn.bind(this);
     this.web3 = new Web3(Web3.givenProvider || process.env.REACT_APP_FALLBACK_PROVIDER);
     this.contract = new this.web3.eth.Contract(BurnContract.abi, process.env.REACT_APP_CONTRACT_ADDRESS);
 
@@ -45,32 +46,42 @@ class App extends Component {
     contract.events.BurnEvent({}, this.handleBurnEvent.bind(this));
   }
 
-  //TODO: Make sure these are coming in order and apply the correct key here too.
   initBurns() {
+    const promises = [];
+    let that = this;
+
     this.contract.methods.burnCount().call().then(count => {
       for(let i = 0; i < count; i++) {
-        this.contract.methods.burns(i).call().then(data => {
-          this.addBurn(data);
-        });
+        promises.push(this.contract.methods.burns(i).call())
       }
+
+      Promise.all(promises).then(rawBurns => {
+        let burns = rawBurns.map(that.buildBurn);
+        that.setState({burns});
+      });
     });
+  }
+
+  //Takes a burn result from web3, parses the name, and stores the minimal amount of info required.
+  buildBurn(rawBurn) {
+    const [message, name] = this.parseBurnMessage(rawBurn.message);
+
+    return {
+      message: message,
+      name: name,
+      burnerAddress: rawBurn.burnerAddress,
+      burntAmount: rawBurn.burntAmount
+    };
   }
 
   //Include transactionHash if you are adding burn due to a user triggered burn.
   //This will ensure the element is not rendered again when picked up from the event feed.
-  addBurn(burn, transactionHash) {
+  addBurn(rawBurn, transactionHash) {
     if(transactionHash !== undefined) {
       this.alreadyRendered[transactionHash] = true;
     }
 
-    const [message, name] = this.parseBurnMessage(burn.message);
-
-    const newBurn = {
-      message: message,
-      name: name,
-      burnerAddress: burn.burnerAddress,
-      burntAmount: burn.burntAmount
-    };
+    let newBurn = this.buildBurn(rawBurn);
 
     const burns = this.state.burns.slice();
     burns.push(newBurn);
