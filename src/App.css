@@ -25,7 +25,6 @@ h1 {
 }
 
 
-
 #burn-modal {
   text-align: center;
 }
@@ -121,9 +120,41 @@ h1 {
   padding: 10px;
 }
 
+#eth-rip-title h1 {
+  display: inline-block;
+  margin-right: 20px;
+  font-size: 50px;
+  vertical-align: middle;
+}
+
+#eth-rip-title p {
+  margin-bottom: 0;
+  font-size: 20px;
+}
+
+#total-burnt-div {
+  display: inline-block;
+  vertical-align: middle;
+}
+
 #burn-form {
   text-align: left;
   margin-left: 10%
+}
+
+#center-inner {
+  background: black;
+  position: relative;
+}
+
+#fire-wrapper {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+#fire-gif {
+  width: 100%;
 }
 
 #burn-form input, textarea {

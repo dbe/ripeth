@@ -153,21 +153,19 @@ class App extends Component {
 
   renderFire() {
     return (
-      <div className="inner">
+      <div id="center-inner" className="inner">
         <div className="col-title" id="eth-rip-title">
-          <h1>ETH.RIP //</h1>
-        </div>
-        <div className="col-contents">
-          <p>
-            ethereum smart contracts. what can we do with it? make tons of money ICOing or just burn it. We dont make any profits, we just want anarchy
-          </p>
+          <h1>ETH.RIP / </h1>
+          <div id="total-burnt-div">
+            <p>total burnt:</p>
+            <p>{this.totalBurnt()} eth</p>
+          </div>
         </div>
         <div className="col-contents last">
-          <p>
-            Total Burnt: { this.totalBurnt() } eth
-          </p>
-
           <button type='button' id="burn-eth-button" className='btn lime burn-button' data-toggle="modal" data-target="#burn-modal">burn eth</button>
+        </div>
+        <div id="fire-wrapper">
+          <img id="fire-gif" src="/fire.gif" />
         </div>
       </div>
     );
