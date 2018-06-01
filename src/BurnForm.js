@@ -19,14 +19,20 @@ class BurnForm extends React.Component {
       burntAmount: this.props.toWei(amount, 'ether')
     };
 
-    this.props.contract.methods.burn(burn.message).send({
+    let transaction = this.props.contract.methods.burn(burn.message)
+    transaction.estimateGas({
       from: burn.burnerAddress,
-      value: burn.burntAmount,
-      gas: 200000
-    }).on('transactionHash', hash => {
-      this.props.addBurn(burn, hash);
-      $('#burn-form')[0].reset();
-      $('#close-modal').click();
+      value: burn.burntAmount
+    }).then(gasEstimate => {
+      transaction.send({
+        from: burn.burnerAddress,
+        value: burn.burntAmount,
+        gas: gasEstimate
+      }).on('transactionHash', hash => {
+        this.props.addBurn(burn, hash);
+        $('#burn-form')[0].reset();
+        $('#close-modal').click();
+      });
     });
   }
 
