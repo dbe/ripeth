@@ -172,8 +172,8 @@ class App extends Component {
           <button type='button' id="burn-eth-button" className='btn lime burn-button' data-toggle="modal" data-target="#burn-modal">burn eth</button>
         </div>
         <div id="fire-wrapper">
-          <img id="fire-gif" src="/fire.gif" />
-          <img id="coin-pile-png" src="/coin-pile.png" />
+          <img id="fire-gif" src="/fire.gif" alt="fire"/>
+          <img id="coin-pile-png" src="/coin-pile.png" alt="coin-pile" />
         </div>
       </div>
     );

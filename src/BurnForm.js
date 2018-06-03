@@ -13,6 +13,13 @@ class BurnForm extends React.Component {
   }
 
   burn(amount, name, message) {
+    let form = $("#burn-form")[0];
+
+    if(!form.checkValidity()) {
+      form.classList.add('was-validated');
+      return;
+    }
+
     let burn = {
       message: message + ":" + name,
       burnerAddress: this.props.selectedAddress,
@@ -30,7 +37,7 @@ class BurnForm extends React.Component {
         gas: gasEstimate
       }).on('transactionHash', hash => {
         this.props.addBurn(burn, hash);
-        $('#burn-form')[0].reset();
+        form.reset();
         $('#close-modal').click();
       });
     });
@@ -38,15 +45,21 @@ class BurnForm extends React.Component {
 
   renderForm() {
     return (
-      <form id="burn-form" onSubmit={this.handleSubmit} >
+      <form id="burn-form" onSubmit={this.handleSubmit} class="needs-validation" noValidate>
         <div className="form-group">
-          <input type="text" placeholder="amount of ethereum" ref={(input) => this.amount = input} />
+          <input type="text" id="eth-amount" className="form-control" placeholder="amount of ethereum" ref={(input) => this.amount = input} required pattern="^-?[0-9.]+"/>
+          <div class="invalid-feedback">
+            Please enter a number
+          </div>
         </div>
         <div className="form-group">
-          <input type="text" placeholder="name..." ref={(input) => this.name = input} />
+          <input type="text" className="form-control" placeholder="name..." ref={(input) => this.name = input} />
         </div>
         <div className="form-group">
-          <textarea type="text" placeholder="message..." ref={(input) => this.message = input} />
+          <textarea type="text" className="form-control" placeholder="message..." ref={(input) => this.message = input} required />
+          <div class="invalid-feedback">
+            A message is required
+          </div>
         </div>
         <div className="form-group">
           <input className="burn-button lime" type="submit" value="burn it" />
