@@ -6,6 +6,7 @@ import './App.css';
 import Burn from './Burn.js';
 import BurnContract from './eth/build/contracts/BurnContract.json';
 import BurnModal from './BurnModal';
+import Ticker from './Ticker';
 
 class App extends Component {
   constructor(props) {
@@ -124,6 +125,12 @@ class App extends Component {
     });
   }
 
+  topBurns() {
+    let burns = this.state.burns.slice();
+    burns.sort((a, b) => b.burntAmount - a.burntAmount);
+    return burns.slice(0, 5);
+  }
+
   totalBurnt() {
     let wei = this.state.burns.reduce(function(sum, burn) {
       return sum.plus(burn.burntAmount);
@@ -205,6 +212,9 @@ class App extends Component {
   render() {
     return (
       <div className="App container-fluid">
+        <div className="row">
+          <Ticker burns={this.topBurns()} fromWei={this.web3.utils.fromWei} />
+        </div>
         <div className="row">
 
           <div className="col-md-3 order-2 order-md-1">
