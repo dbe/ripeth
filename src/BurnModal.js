@@ -71,7 +71,7 @@ class BurnModal extends React.Component {
   renderConfirmation() {
     return (
       <div>
-        <p>Burning your ethereum means you will never get it back. You are quite literally throwing away your money. Check the <a href="#">source code</a></p>
+        <p>Burning your ethereum means you will never get it back. You are quite literally throwing away your money. Check the <a href="https://ropsten.etherscan.io/address/0x401c415c843681de15c0909e225b14e545762fcb#code" target="_">source code</a></p>
         <button type='button' className='btn lime burn-button' data-toggle="modal" data-target="#burn-modal">close</button>
         <button type='button' className='btn lime burn-button' onClick={() => this.setState({confirmed: true})}>continue</button>
       </div>
