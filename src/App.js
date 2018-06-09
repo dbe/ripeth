@@ -145,14 +145,25 @@ class App extends Component {
         <div className="col-title">
           <h1>ABOUT</h1>
         </div>
-        <div className="col-contents">
-          <p>
-            Made by dream.eth for the giggles.
+
+        <div className="col-contents q-n-a">
+          <p className="question">What in the hell am I looking at?</p>
+          <p className="answer">This is a fire pit, designed for one purpose: To burn your money.</p>
+          <p className="question">And why would I want to do that?</p>
+          <p className="answer">Why not? You at least get to attach a message to forever memorialize your great deed.</p>
+          <p className="question">So, I send you money and you just steal it?</p>
+          <p className="answer">Nope, using smart contracts, the money is locked up forever. No one can get it no matter how badly they want to. Not you, not me, not the government. No one.</p>
+          <p className="answer">
+            {'In fact, please go verify this for yourself, we need more healthy skepticism in the crypto world: '}
+            <a href="https://ropsten.etherscan.io/address/0x401c415c843681de15c0909e225b14e545762fcb#code" target="_">Source Code</a>
           </p>
+
         </div>
+
         <div className="col-contents last">
-          <p>Go ahead and burn it. No one will get it. I promise.</p>
-          <p>At the moment, Ethereum is nothing but a parlor trick. A toy (Vitalik said it not me) So sometimes, you throw away toys.</p>
+          <p>
+            Made by dream
+          </p>
         </div>
       </div>
     );

@@ -10,7 +10,6 @@ h1 {
   font-weight: bold;
 }
 
-
 ::-webkit-scrollbar {
   width: 24px;
 }
@@ -25,8 +24,8 @@ h1 {
 }
 
 #ticker {
-  border-top: 6px solid black;
-  border-bottom: 6px solid black;
+  border-top: 3px solid black;
+  border-bottom: 3px solid black;
   margin-bottom: 20px;
   background-color: #58FD34;
   white-space: nowrap;
@@ -122,7 +121,7 @@ h1 {
 
 .inner {
   border: 3px solid black;
-  height: 90vh;
+  height: 85vh;
   overflow: auto;
 }
 
@@ -194,4 +193,13 @@ h1 {
 
 #burn-form input, textarea {
   width: 50%;
+}
+
+p.answer {
+  font-weight: normal;
+  font-size: 12px;
+}
+
+.q-n-a {
+  text-align: left;
 }
