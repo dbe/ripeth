@@ -3,10 +3,6 @@
 }
 
 p {
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
   font-weight: 500;
 }
 
@@ -167,7 +163,6 @@ h1 {
 #total-burnt-div {
   display: inline-block;
   vertical-align: middle;
-  line-height: 90%;
 }
 
 #burn-form {
@@ -213,6 +208,13 @@ h1 {
 p.answer {
   font-weight: normal;
   font-size: 12px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+p.question {
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .q-n-a {
