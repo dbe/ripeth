@@ -104,7 +104,7 @@ class App extends Component {
   }
 
   handleBurnEvent(error, data) {
-    if(data === undefined) {
+    if(!data) {
       return;
     }
 
