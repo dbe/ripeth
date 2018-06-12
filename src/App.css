@@ -127,7 +127,7 @@ h1 {
 
 .inner {
   border: 3px solid black;
-  height: 85vh;
+  height: calc(85vh - 56px);
   overflow: auto;
 }
 
@@ -174,6 +174,7 @@ h1 {
   background: black;
   position: relative;
   overflow: hidden;
+  height: 85vh;
 }
 
 #fire-wrapper {
