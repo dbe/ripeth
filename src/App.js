@@ -228,15 +228,15 @@ class App extends Component {
         </div>
         <div className="row">
 
-          <div className="col-md-3 order-2 order-md-1">
+          <div className="col-lg-3 order-2 order-lg-1">
             { this.renderAbout() }
           </div>
 
-          <div className="col-md-6 order-1 order-md-2">
+          <div className="col-lg-6 order-1 order-lg-2">
             { this.renderFire() }
           </div>
 
-          <div className="col-md-3 order-last">
+          <div className="col-lg-3 order-last">
             { this.renderComments() }
           </div>
 

@@ -89,6 +89,7 @@ h1 {
 }
 
 #burn-eth-button {
+  z-index: 100;
   position: relative;
   top: 50px;
   font-weight: bold;
