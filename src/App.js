@@ -226,7 +226,7 @@ class App extends Component {
         <div className="row">
           <Ticker burns={this.topBurns()} fromWei={this.web3.utils.fromWei} />
         </div>
-        <div className="row">
+        <div className="row" id="main-content">
 
           <div className="col-md-3 order-2 order-md-1">
             { this.renderAbout() }
