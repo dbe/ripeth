@@ -173,7 +173,7 @@ class App extends Component {
     return (
       <div id="center-inner" className="inner">
         <div className="col-title" id="eth-rip-title">
-          <h1>ETH.RIP / </h1>
+          <h1>ETH.RIP/ </h1>
           <div id="total-burnt-div">
             <p>total burnt:</p>
             <p>{this.totalBurnt()} eth</p>

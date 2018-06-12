@@ -6,6 +6,7 @@ p {
   margin-left: 10px;
   margin-right: 10px;
   margin-top: 10px;
+  margin-bottom: 10px;
   font-weight: 500;
 }
 
@@ -99,7 +100,7 @@ h1 {
 #burn-eth-button {
   z-index: 100;
   position: relative;
-  top: 50px;
+  top: 80px;
   font-weight: bold;
   font-style: italic;
   padding: 10px 40px 10px 40px;
@@ -146,7 +147,9 @@ h1 {
   background-color: #58FD34;
   color: black;
   text-align: left;
-  padding: 10px;
+  padding-left: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 #eth-rip-title h1 {
@@ -164,6 +167,7 @@ h1 {
 #total-burnt-div {
   display: inline-block;
   vertical-align: middle;
+  line-height: 90%;
 }
 
 #burn-form {
