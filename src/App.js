@@ -162,7 +162,7 @@ class App extends Component {
 
           <div className="col-contents last">
             <p>
-              Made by dream
+              Made by <a href="https://www.dream.associates" target="_">dream</a>
             </p>
           </div>
         </div>
