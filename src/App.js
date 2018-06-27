@@ -157,6 +157,11 @@ class App extends Component {
               {'In fact, please go verify this for yourself, we need more healthy skepticism in the crypto world: '}
               <a href="https://ropsten.etherscan.io/address/0x401c415c843681de15c0909e225b14e545762fcb#code" target="_">Source Code</a>
             </p>
+            <p className="answer">
+              I also wrote a blog post outlining some simple scams in Ethereum, and ways you can protect yourself. Check it out here if you'd like: <a href="https://medium.com/coinmonks/scamming-in-ethereum-is-easy-56aba1a6d985" target="_">Medium</a>
+            </p>
+            <p className="question">Why did you make this site?</p>
+            <p className="answer">I'm a crypto idealist, and honestly quite tired of the current scammy ICO spam. I just wanted to make somthing pure and authentic.</p>
 
           </div>
 
