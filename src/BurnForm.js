@@ -45,10 +45,10 @@ class BurnForm extends React.Component {
 
   renderForm() {
     return (
-      <form id="burn-form" onSubmit={this.handleSubmit} class="needs-validation" noValidate>
+      <form id="burn-form" onSubmit={this.handleSubmit} className="needs-validation" noValidate>
         <div className="form-group">
           <input type="text" id="eth-amount" className="form-control" placeholder="amount of ethereum" ref={(input) => this.amount = input} required pattern="^-?[0-9.]+"/>
-          <div class="invalid-feedback">
+          <div className="invalid-feedback">
             Please enter a number
           </div>
         </div>
@@ -57,7 +57,7 @@ class BurnForm extends React.Component {
         </div>
         <div className="form-group">
           <textarea type="text" className="form-control" placeholder="message..." ref={(input) => this.message = input} required />
-          <div class="invalid-feedback">
+          <div className="invalid-feedback">
             A message is required
           </div>
         </div>

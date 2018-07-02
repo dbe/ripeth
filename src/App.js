@@ -29,7 +29,8 @@ class App extends Component {
       this.state.networkVersion = configStore.getState().networkVersion;
     }
 
-    this.setupEventListener();
+    //TODO: Fix this once infura gets their act together
+    // this.setupEventListener();
     this.initBurns();
     this.alreadyRendered = {};
   }
